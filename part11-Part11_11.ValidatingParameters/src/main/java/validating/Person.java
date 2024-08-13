@@ -6,8 +6,10 @@ public class Person {
     private int age;
 
     public Person(String name, int age) {
-        if(name.equals(null) || name.equals("") || name.length()>40){
+        if(name == null || name.isEmpty() || name.length()>40){
+            System.out.println("May be name is null");
             throw new IllegalArgumentException("Name can not be null,empty or more than 40 characters long");
+            
         }
         this.name = name;
         if(age < 0 || age > 120){
