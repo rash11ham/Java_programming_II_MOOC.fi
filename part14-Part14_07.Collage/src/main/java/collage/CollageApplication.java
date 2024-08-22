@@ -2,6 +2,7 @@ package collage;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,16 +43,20 @@ public class CollageApplication extends Application {
 
                 Color newColor = new Color(red, green, blue, opacity);
 
-                imageWriter.setColor(xCoordinate, yCoordinate, newColor);
+                imageWriter.setColor(xCoordinate / 2, yCoordinate / 2, newColor.invert()); // Top left
+                imageWriter.setColor((width/2) + xCoordinate/2, yCoordinate/2, newColor.invert()); // Top right
+                imageWriter.setColor((width/2) + xCoordinate/2, (height/2) + yCoordinate/2, newColor.invert()); // Bottom right
+                imageWriter.setColor(xCoordinate/2, (height/2) + yCoordinate/2, newColor.invert()); // Bottom left
 
-                xCoordinate++;
+                xCoordinate += 2;
             }
 
-            yCoordinate++;
+            yCoordinate += 2;
         }
 
         ImageView image = new ImageView(targetImage);
 
+      
         Pane pane = new Pane();
         pane.getChildren().add(image);
 
@@ -60,7 +65,7 @@ public class CollageApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch(CollageApplication.class);
     }
 
 }
